@@ -21,7 +21,7 @@ MUFASA"
 (cd /home/vagrant && \
 su - vagrant -c 'p4 protect -o > add' && \
 echo -e "\tadmin user $SWARMUSER * //..." >> add && \
-su - vagrant -c 'p4 protect -i < add' && \
+su - vagrant -c 'p4 protect -i << add' && \
 rm add)
 
 /opt/perforce/swarm/sbin/configure-swarm.sh -p $P4PORT -u $SWARMUSER -w $SWARMPASSWD -U $P4USER -W $P4PASSWD -e localhost
