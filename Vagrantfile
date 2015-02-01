@@ -22,5 +22,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "jenkins", autostart: false do |jenkins|
+    jenkins.vm.provision "shell" do |s|
+      s.path = "install.sh"
+      s.args = ["p4", "jenkins"]
+    end
+
+    jenkins.vm.network :forwarded_port, guest: 80, host: 8081
   end
 end
