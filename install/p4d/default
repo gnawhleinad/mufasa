@@ -5,3 +5,6 @@ P4JOURNAL=/var/log/p4d/journal.log
 
 P4USER=mufasa
 P4PASSWD=mufasa
+
+SWARMUSER=swarm
+SWARMPASSWD=mufasa

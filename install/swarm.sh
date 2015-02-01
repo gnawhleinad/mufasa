@@ -10,6 +10,20 @@ deb http://package.perforce.com/apt/ubuntu precise release
 MUFASA
 
 apt-get update
-apt-get install -qq perforce-swarm
+apt-get install -qq perforce-swarm perforce-swarm-triggers
 
-/opt/perforce/swarm/sbin/configure-swarm.sh -p $P4PORT -u swarm -w mufasa -c -U $P4USER -W $P4PASSWD
+su - vagrant -c "p4 user -i -f << MUFASA
+User: $SWARMUSER
+Password: $SWARMPASSWD
+Email: swarm@priderock
+FullName: swarm
+MUFASA"
+(cd /home/vagrant && \
+su - vagrant -c 'p4 protect -o > add' && \
+echo -e "\tadmin user $SWARMUSER * //..." >> add && \
+su - vagrant -c 'p4 protect -i < add' && \
+rm add)
+
+/opt/perforce/swarm/sbin/configure-swarm.sh -p $P4PORT -u $SWARMUSER -w $SWARMPASSWD -U $P4USER -W $P4PASSWD -e localhost
+(cd /opt/perforce/etc && \
+sed -i 's#^\(SWARM_HOST\s*=\s*\).*$#\1"http://localhost"#' swarm-trigger.conf)
