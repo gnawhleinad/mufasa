@@ -16,4 +16,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.path = "install.sh"
     s.args = ["p4", "p4d", "swarm"]
   end
+
+  config.vm.network :forwarded_port, guest: 80, host: 8080
 end
