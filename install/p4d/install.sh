@@ -29,7 +29,7 @@ Email: mufasa@priderock
 FullName: mufasa, great king of the past 
 MUFASA"
 
-su - vagrant -c "p4 protect << SIMBA
+su - vagrant -c "p4 protect -i << SIMBA
 Protections:
 	write user * * //...
 	super user $P4USER * //...
