@@ -25,8 +25,8 @@ git clone https://github.com/kevinburke/doony.git && \
 chown jenkins:jenkins -R doony)
 cat > /var/lib/jenkins/org.codefirst.SimpleThemeDecorator.xml << SIMBA
 <org.codefirst.SimpleThemeDecorator plugin="simple-theme-plugin@0.3">
-  <cssUrl>http://localhost:8081/userContent/doony/doony.css</cssUrl>
-  <jsUrl>http://localhost:8081/userContent/doony/doony.js</jsUrl>
+  <cssUrl>http://jenkins.test:8081/userContent/doony/doony.css</cssUrl>
+  <jsUrl>http://jenkins.test:8081/userContent/doony/doony.js</jsUrl>
 </org.codefirst.SimpleThemeDecorator>
 SIMBA
 chown jenkins:jenkins /var/lib/jenkins/org.codefirst.SimpleThemeDecorator.xml 
