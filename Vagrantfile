@@ -12,10 +12,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--memory", 2048]
   end
 
-  config.vm.provision "shell" do |s|
-    s.path = "install.sh"
-    s.args = ["p4", "p4d", "swarm"]
+  config.vm.define "p4d", primary: true do |p4d|
+    p4d.vm.provision "shell" do |s|
+      s.path = "install.sh"
+      s.args = ["p4", "p4d", "swarm"]
+    end
+
+    p4d.vm.network :forwarded_port, guest: 80, host: 8080
   end
 
-  config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.define "jenkins", autostart: false do |jenkins|
+  end
 end
