@@ -11,8 +11,8 @@ chmod 755 /usr/local/bin/p4
 cat > /home/vagrant/.p4config << MUFASA
 P4CLIENT=mufasa
 P4PORT=$P4PORT
-P4USER=mufasa
-P4PASSWD=mufasa
+P4USER=$P4USER
+P4PASSWD=$P4PASSWD
 P4EDITOR=vim
 MUFASA
 chown vagrant:vagrant /home/vagrant/.p4config
