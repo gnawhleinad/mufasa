@@ -1,0 +1,7 @@
+P4ROOT=/opt/p4d
+P4PORT=localhost:1666
+P4LOG=/var/log/p4d/error.log
+P4JOURNAL=/var/log/p4d/journal.log
+
+P4USER=mufasa
+P4PASSWD=mufasa

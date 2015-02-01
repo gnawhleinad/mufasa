@@ -1,0 +1,68 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          p4d 
+# Required-Start:    $network
+# Required-Stop:     $network
+# Should-Start:      $named dbus avahi network-manager wicd
+# Should-Stop:       $named dbus avahi network-manager wicd
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+### END INIT INFO
+
+NAME="p4d"
+DAEMON="/usr/local/bin/$NAME"
+SETTINGS="/etc/default/$NAME"
+OPTS="-d"
+PIDFILE="/var/run/$NAME.pid"
+
+([ -x "$DAEMON" ] && [ -r "$SETTINGS" ]) || exit 0
+[ -e "$PIDFILE" ] && [ ! kill -0 $PID > /dev/null 2>&1 ] && rm $PID_FILE
+
+start_p4d() {
+	start-stop-daemon --start --pidfile $PIDFILE --exec $DAEMON -- $OPTS -r $P4ROOT -p $P4PORT -L $P4LOG -J $P4JOURNAL
+}
+
+stop_p4d() {
+	start-stop-daemon --stop --pidfile $PIDFILE --retry 15 --oknodo
+}
+
+. /lib/lsb/init-functions
+. $SETTINGS
+
+case "$1" in
+	start)
+		echo "Starting $NAME"
+		start_p4d
+		;;
+	stop)
+		echo "Stopping $NAME"
+		stop_p4d
+		;;
+	restart|force-reload)
+		echo "Restarting $NAME"
+		stop_p4d
+		start_p4d
+		;;
+	status)
+		if [ -e $PIDFILE ]
+		then
+			PID=`cat $PIDFILE`
+			if [ kill -0 $PID ]
+			then
+				echo " * $NAME is running"
+				exit 0
+			fi
+		else
+			echo " * $NAME is not running"
+			exit 3
+		fi
+		;;
+	*)
+		echo "Usage: /etc/init.d/${NAME} {start|stop|restart|force-reload|status" >&2
+		exit 1
+		;;
+esac
+
+exit 0
+
