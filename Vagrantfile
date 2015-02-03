@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     p4d.vm.provision "shell" do |s|
       s.path = "install.sh"
-      s.args = ["p4", "p4d", "swarm"]
+      s.args = ["avahi", "p4", "p4d", "swarm"]
     end
 
     p4d.vm.network :forwarded_port, guest: 1666, host: 1666
@@ -28,10 +28,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     jenkins.vm.provision "shell" do |s|
       s.path = "install.sh"
-      s.args = ["p4", "jenkins"]
+      s.args = ["avahi", "p4", "jenkins"]
     end
 
-    jenkins.vm.network :forwarded_port, guest: 80, host: 8081
+    jenkins.vm.network :forwarded_port, guest: 8080, host: 8081
   end
 
   config.vm.network :private_network, type: "dhcp"

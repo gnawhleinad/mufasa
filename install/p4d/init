@@ -20,7 +20,7 @@ PIDFILE="/var/run/$NAME.pid"
 [ -e "$PIDFILE" ] && [ ! kill -0 $PID > /dev/null 2>&1 ] && rm $PID_FILE
 
 start_p4d() {
-	start-stop-daemon --start --pidfile $PIDFILE --exec $DAEMON -- $OPTS -r $P4ROOT -p $P4PORT -L $P4LOG -J $P4JOURNAL
+	start-stop-daemon --start --pidfile $PIDFILE --exec $DAEMON -- $OPTS -r $P4ROOT -p ":$(echo $P4PORT | cut -d: -f2)" -L $P4LOG -J $P4JOURNAL
 }
 
 stop_p4d() {
