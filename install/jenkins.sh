@@ -10,10 +10,10 @@ apt-get install -qq jenkins
 
 service jenkins start
 
-curl -sSO https://updates.jenkins-ci.org/latest/jquery.hpi
-curl -sSO https://updates.jenkins-ci.org/latest/simple-theme-plugin.hpi
-curl -sSO https://updates.jenkins-ci.org/latest/scm-api.hpi
-curl -sSO https://updates.jenkins-ci.org/latest/perforce.hpi
+curl -sSOL https://updates.jenkins-ci.org/latest/jquery.hpi
+curl -sSOL https://updates.jenkins-ci.org/latest/simple-theme-plugin.hpi
+curl -sSOL https://updates.jenkins-ci.org/latest/scm-api.hpi
+curl -sSOL https://updates.jenkins-ci.org/latest/perforce.hpi
 chown jenkins:jenkins *.hpi
 mv *.hpi /var/lib/jenkins/plugins
 
