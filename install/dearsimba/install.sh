@@ -18,5 +18,5 @@ MUFASA"
 cp "${WD}"/rememberwhoyouare.c /home/vagrant/depot/
 cp "${WD}"/Makefile /home/vagrant/depot/
 
-p4 add /home/vagrant/depot/*
-p4 submit -d "dear simba"
+su - vagrant -c 'p4 add /home/vagrant/depot/*'
+su - vagrant -c 'p4 submit -d "dear simba"'
