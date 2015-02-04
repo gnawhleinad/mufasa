@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     jenkins.vm.provision "shell" do |s|
       s.path = "install.sh"
-      s.args = ["avahi", "p4", "jenkins"]
+      s.args = ["avahi", "p4", "jenkins", "dearsimba"]
     end
 
     jenkins.vm.network :forwarded_port, guest: 8080, host: 8081
