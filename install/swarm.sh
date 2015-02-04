@@ -24,11 +24,11 @@ echo -e "\tadmin user $SWARMUSER * //..." >> add && \
 su - vagrant -c 'p4 protect -i << add' && \
 rm add)
 
-/opt/perforce/swarm/sbin/configure-swarm.sh -p $P4PORT -u $SWARMUSER -w $SWARMPASSWD -U $P4USER -W $P4PASSWD -e localhost
+/opt/perforce/swarm/sbin/configure-swarm.sh -p $P4PORT -u $SWARMUSER -w $SWARMPASSWD -U $P4USER -W $P4PASSWD -e $(hostname -f)
 
 curl -sS http://localhost/login -c cookie -d "user=${P4USER}&password=${P4PASSWD}" -o /dev/null
 token=$(curl -sS http://localhost/about -b cookie | sed -nr 's#^.*token muted.*value="(.+)".*$#\1#p')
 rm cookie
 (cd /opt/perforce/etc && \
-sed -i 's#^\(SWARM_HOST\s*=\s*\).*$#\1"http://localhost"#' swarm-trigger.conf && \
+sed -i 's#^\(ADMIN_USER\s*=\s*\).*$#\1"http://'"$(hostname -f)"'"#' swarm-trigger.conf && \
 sed -i 's#^\(SWARM_TOKEN\s*=\s*\).*$#\1"'$token'"#' swarm-trigger.conf)
