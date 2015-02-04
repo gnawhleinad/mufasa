@@ -20,6 +20,7 @@ FullName: swarm
 MUFASA"
 (cd /home/vagrant && \
 su - vagrant -c 'p4 protect -o > add' && \
+sed -i '$d' add && \
 echo -e "\tadmin user $SWARMUSER * //..." >> add && \
 su - vagrant -c 'p4 protect -i << add' && \
 rm add)
