@@ -13,7 +13,8 @@ service jenkins start
 curl -sSOL https://updates.jenkins-ci.org/latest/jquery.hpi
 curl -sSOL https://updates.jenkins-ci.org/latest/simple-theme-plugin.hpi
 curl -sSOL https://updates.jenkins-ci.org/latest/scm-api.hpi
-curl -sSOL https://updates.jenkins-ci.org/latest/perforce.hpi
+curl -sSOL https://updates.jenkins-ci.org/latest/credentials.hpi
+curl -sSOL https://updates.jenkins-ci.org/latest/p4.hpi
 chown jenkins:jenkins *.hpi
 mv *.hpi /var/lib/jenkins/plugins
 
