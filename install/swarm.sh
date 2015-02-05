@@ -31,5 +31,5 @@ curl -sS http://localhost/login -c cookie -d "user=${P4USER}&password=${P4PASSWD
 token=$(curl -sS http://localhost/about -b cookie | sed -nr 's#^.*token muted.*value="(.+)".*$#\1#p')
 rm cookie
 (cd /opt/perforce/etc && \
-sed -i 's#^\(ADMIN_USER\s*=\s*\).*$#\1"http://'"$(hostname -f)"'"#' swarm-trigger.conf && \
+sed -i 's#^\(SWARM_HOST\s*=\s*\).*$#\1"http://'"$(hostname -f)"'"#' swarm-trigger.conf && \
 sed -i 's#^\(SWARM_TOKEN\s*=\s*\).*$#\1"'$token'"#' swarm-trigger.conf)
