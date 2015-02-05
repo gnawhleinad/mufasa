@@ -8,11 +8,14 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
 ## Setup
 ### P4D/Swarm
 1. Start the `p4d` machine:
+
         $ vagrant up p4d
 2. Log in via `http://localhost:8080`:
+
         Username: mufasa
         Password: mufasa
 3. Add a project via `http://localhost:8080/projects/add`:
+
         Name: main
         Members: mufasa
         Branches: 
@@ -23,16 +26,20 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
 
 ### Jenkins
 1. Start the `jenkins` machine:
+
         $ vagrant up jenkins
 2. Add credential via `http://localhost:8081/credential-store/domain/_/newCredentials`:
+
         Kind: Perforce Password Credential
         Description: p4d.test
         P4Port: p4d.test:1666
         Username: mufasa
         Password: mufasa
 3. Add a label via `http://localhost:8081/computer/(master)/configure`:
+
         Labels: swarm
 4. Add a item via `http://localhost:8081/view/All/newJob`:
+
         Item name: swarm_main
         Type: Freestyle project
 
@@ -57,8 +64,10 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
 ## Automated Tests
 This section will demonstrate the automated task queued after requesing a review.
 1. Log in:
+
         $ vagrant ssh p4d
 2. Edit and shelve:
+
         $ cd depot
         $ p4 edit rememberwhoyouare.c
         $ p4 shelve
