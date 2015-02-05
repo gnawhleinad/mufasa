@@ -32,4 +32,8 @@ token=$(curl -sS http://localhost/about -b cookie | sed -nr 's#^.*token muted.*v
 rm cookie
 (cd /opt/perforce/etc && \
 sed -i 's#^\(SWARM_HOST\s*=\s*\).*$#\1"http://'"$(hostname -f)"'"#' swarm-trigger.conf && \
-sed -i 's#^\(SWARM_TOKEN\s*=\s*\).*$#\1"'$token'"#' swarm-trigger.conf)
+sed -i 's#^\(SWARM_TOKEN\s*=\s*\).*$#\1"'$token'"#' swarm-trigger.conf && \
+echo "localhost" >> swarm-cron-hosts.conf)
+
+a2dissite 000-default
+service apache2 reload
