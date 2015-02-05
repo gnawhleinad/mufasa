@@ -22,15 +22,19 @@ chmod 755 /etc/default/p4d
 update-rc.d p4d defaults
 /etc/init.d/p4d start
 
-su - vagrant -c "p4 user -i -f << MUFASA
+curl -sSO http://filehost.perforce.com/perforce/r14.2/bin.linux26x86_64/p4
+mv p4 /usr/local/bin
+chmod 755 /usr/local/bin/p4
+
+P4PORT=$P4PORT p4 user -i -f << MUFASA
 User: $P4USER
 Password: $P4PASSWD
 Email: mufasa@priderock
 FullName: mufasa, great king of the past 
-MUFASA"
+MUFASA
 
-su - vagrant -c "p4 protect -i << SIMBA
+P4PORT=$P4PORT p4 protect -i << SIMBA
 Protections:
 	write user * * //...
 	super user $P4USER * //...
-SIMBA"
+SIMBA
