@@ -56,7 +56,7 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
         Repository browser: Swarm browser
             URL: http://localhost:8080
         Add build step: Execute shell
-            Command: make -k > build.log 2>&1
+            Command: make -k 2>&1 | tee build.log
         Add post-build action: Archive the artifacts
             Files to artifact: build.log
 
