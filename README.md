@@ -59,7 +59,7 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
         Add build step: Execute shell
             Command:
                 #!/bin/bash
-                make 2>&1 | tee build.log; test "${PIPESTATUS[0]} -eq 0"
+                make 2>&1 | tee build.log; exit ${PIPESTATUS[0]}
         Add post-build action: Archive the artifacts
             Files to artifact: build.log
 
