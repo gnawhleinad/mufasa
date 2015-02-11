@@ -43,6 +43,7 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
         Item name: swarm_main
         Type: Freestyle project
 
+        Execute concurrent builds if necessary
         Restrict where this project can be run:
             Label Expression: swarm
         Source Code Managment:
@@ -56,7 +57,9 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
         Repository browser: Swarm browser
             URL: http://localhost:8080
         Add build step: Execute shell
-            Command: make 2>&1 | tee build.log
+            Command:
+                #!/bin/bash
+                make 2>&1 | tee build.log; test "${PIPESTATUS[0]} -eq 0"
         Add post-build action: Archive the artifacts
             Files to artifact: build.log
 
