@@ -43,7 +43,6 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
         Item name: swarm_main
         Type: Freestyle project
 
-        Execute concurrent builds if necessary
         Restrict where this project can be run:
             Label Expression: swarm
         Source Code Managment:
