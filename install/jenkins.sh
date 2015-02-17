@@ -6,7 +6,7 @@ deb http://pkg.jenkins-ci.org/debian-stable binary/
 MUFASA
 
 apt-get update
-apt-get install -qq jenkins
+apt-get install -qq jenkins git
 
 service jenkins start
 
@@ -15,11 +15,12 @@ curl -sSOL https://updates.jenkins-ci.org/latest/simple-theme-plugin.hpi
 curl -sSOL https://updates.jenkins-ci.org/latest/scm-api.hpi
 curl -sSOL https://updates.jenkins-ci.org/latest/credentials.hpi
 curl -sSOL https://updates.jenkins-ci.org/latest/p4.hpi
+curl -sSOL https://updates.jenkins-ci.org/latest/git-client.hpi
+curl -sSOL https://updates.jenkins-ci.org/latest/git.hpi
 curl -sSOL https://updates.jenkins-ci.org/latest/scp.hpi
 chown jenkins:jenkins *.hpi
 mv *.hpi /var/lib/jenkins/plugins
 
-apt-get install -qq git
 ssh-keyscan -H github.com > /root/.ssh/known_hosts
 
 (cd /var/lib/jenkins/userContent && \
