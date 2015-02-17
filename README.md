@@ -50,6 +50,7 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
             Type: Perforce Software
             Workspace behaviour: Manual (custom view)
                 Workspace name: jenkins
+                Pin the workspace to the build host
                 View Mappings: //depot/... //jenkins/...
         Populate options: Auto cleanup and sync
             REPLACE missing/modified files
