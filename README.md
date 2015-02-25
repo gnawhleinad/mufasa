@@ -66,10 +66,10 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
                 #!/bin/bash
                 make
                 if $? -eq 0; then
-                    curl -o /dev/null -sS $swarm_pass
+                    curl -o /dev/null -sS "${swarm_pass}?url=${BUILD_URL}"
                     exit 0
                 else
-                    curl -o /dev/null -sS $swarm_fail
+                    curl -o /dev/null -sS "${swarm_fail}?url=${BUILD_URL}"
                     exit 1
                 fi
 
