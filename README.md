@@ -22,7 +22,7 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
             Name: master
             Path: //depot/...
         Automated Tests: Enabled
-            URL: http://jenkins.test:8080/job/swarm_main/review/build?status={status}&review={review}&change={change}&pass={pass}&fail={fail}
+            URL: http://jenkins.test:8080/job/swarm_main/review/build?status={status}&review={review}&change={change}&swarm_pass={pass}&swarm_fail={fail}
 
 ### Jenkins
 1. Start the `jenkins` machine:
@@ -43,6 +43,11 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
         Item name: swarm_main
         Type: Freestyle project
 
+        This build is parameterized
+            String Parameter
+                Name: swarm_pass
+            String Parameter
+                Name: swarm_fail
         Restrict where this project can be run:
             Label Expression: swarm
         Source Code Managment:
@@ -60,6 +65,13 @@ Play with [P4D](http://www.perforce.com/p4d), [Swarm](http://www.perforce.com/sw
             Command:
                 #!/bin/bash
                 make
+                if $? -eq 0; then
+                    curl -o /dev/null -sS $swarm_pass
+                    exit 0
+                else
+                    curl -o /dev/null -sS $swarm_fail
+                    exit 1
+                fi
 
 # Play
 ## Automated Tests
