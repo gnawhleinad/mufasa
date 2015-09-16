@@ -6,11 +6,11 @@ WD=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 wget -q http://package.perforce.com/perforce.pubkey -O - | apt-key add -
 cat > /etc/apt/sources.list.d/perforce.sources.list << MUFASA
-deb http://package.perforce.com/apt/ubuntu precise release 
+deb http://package.perforce.com/apt/ubuntu trusty release
 MUFASA
 
 apt-get update
-apt-get install -qq perforce-swarm perforce-swarm-triggers
+apt-get install -qq helix-swarm helix-swarm-triggers
 
 su - vagrant -c "p4 user -i -f << MUFASA
 User: $SWARMUSER
